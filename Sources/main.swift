@@ -80,7 +80,11 @@ func runningPids(_ profiles: [Profile]) -> [String: pid_t] {
         let args = t[t.index(after: sp)...]
         guard args == claudeBin || args.hasPrefix(claudeBin + " ") else { continue }
         for p in profiles where res[p.id] == nil {
-            if let d = dataDir(p) { if args.contains("--user-data-dir=" + d) { res[p.id] = pid } }
+            // Whole argument only: "Claude-Work" must not match a "Claude-WorkVL" profile.
+            if let d = dataDir(p) {
+                let flag = "--user-data-dir=" + d
+                if args.hasSuffix(flag) || args.contains(flag + " ") { res[p.id] = pid }
+            }
             else if !args.contains("--user-data-dir=") { res[p.id] = pid }
         }
     }
@@ -116,7 +120,24 @@ func focus(_ pid: pid_t) {
 }
 
 func openProfile(_ p: Profile) {
+    // From the Switcher, go through the profile's launcher when it exists, so its Dock dot
+    // lights up; the launcher (fresh, or reopened) then focuses or starts the profile itself.
+    if launcherID == nil, pinned(p), FileManager.default.fileExists(atPath: launcherURL(p).path) {
+        run("/usr/bin/open", ["-a", launcherURL(p).path]); return
+    }
     if let pid = pid(of: p) { focus(pid) } else { launch(p) }
+}
+
+/// Whether the profile's icon is pinned in the Dock. An unpinned profile never gets a running
+/// launcher, which would put its icon back in the Dock while it runs.
+func pinned(_ p: Profile) -> Bool { dockApps().contains { dockURL($0) == launcherURL(p).absoluteString } }
+
+func launcherApp(_ p: Profile) -> NSRunningApplication? {
+    NSWorkspace.shared.runningApplications.first { $0.bundleIdentifier == bundlePrefix + ".profile." + p.id }
+}
+
+func launcherRunning(_ p: Profile) -> Bool {
+    NSWorkspace.shared.runningApplications.contains { $0.bundleIdentifier == bundlePrefix + ".profile." + p.id }
 }
 
 func quitProfile(_ p: Profile) {
@@ -160,7 +181,7 @@ func renderIcon(_ p: Profile, px: Int) -> Data? {
 
 /// Bump on every build: codesign rewrites each launcher's copy of the binary, so
 /// bytes cannot be compared, and this is what tells a launcher it is out of date.
-let switcherVersion = "3.1"
+let switcherVersion = "3.2"
 func iconStamp(_ p: Profile) -> String { "\(p.name)|\(p.color)|\(p.letter)" }
 
 /// (Re)build a profile's launcher when its binary or look is out of date.
@@ -298,7 +319,8 @@ final class Delegate: NSObject, NSApplicationDelegate, NSMenuDelegate {
             let a = CommandLine.arguments
             if let p = profiles.first(where: { $0.id == a[i + 1] }) {
                 ensureLauncher(p)
-                a[i + 2] == "on" ? dockEdit(old: nil, new: launcherURL(p)) : dockEdit(old: launcherURL(p), new: nil)
+                if a[i + 2] == "on" { dockEdit(old: nil, new: launcherURL(p)) }
+                else { dockEdit(old: launcherURL(p), new: nil); launcherApp(p)?.terminate() }
             }
             exit(0)
         }
@@ -316,7 +338,9 @@ final class Delegate: NSObject, NSApplicationDelegate, NSMenuDelegate {
         }
         registerHotkeys(ps.count)
         syncStatusItem()
-        Timer.scheduledTimer(withTimeInterval: 3, repeats: true) { [weak self] _ in self?.refreshStatusTitle() }
+        Timer.scheduledTimer(withTimeInterval: 3, repeats: true) { [weak self] _ in
+            self?.refreshStatusTitle(); self?.attachLaunchers()
+        }
         if !launchedAsLoginItem && !CommandLine.arguments.contains("--quiet") { popMenu() }
     }
 
@@ -324,7 +348,10 @@ final class Delegate: NSObject, NSApplicationDelegate, NSMenuDelegate {
     /// then lives exactly as long as that Claude instance does.
     func startLauncher() {
         guard let p = myProfile else { NSApp.terminate(nil); return }
-        openProfile(p)
+        // --attach: the profile was opened some other way; just show the dot, don't steal focus.
+        if !CommandLine.arguments.contains("--attach") { openProfile(p) }
+        // Unpinned (e.g. started by "Open when the Mac starts"): open the profile and get out of the Dock.
+        if !pinned(p) { NSApp.terminate(nil); return }
         Timer.scheduledTimer(withTimeInterval: 3, repeats: true) { [weak self] _ in
             guard let self else { return }
             guard let p = self.myProfile else { NSApp.terminate(nil); return }
@@ -433,6 +460,19 @@ final class Delegate: NSObject, NSApplicationDelegate, NSMenuDelegate {
         }
     }
 
+    /// A profile opened without its launcher (by Claude itself, an older Switcher, a script)
+    /// still gets its Dock dot: start the launcher in the background, attached.
+    var attachTried: [String: Date] = [:]
+    func attachLaunchers() {
+        let ps = profiles; let pids = runningPids(ps)
+        for p in ps where pids[p.id] != nil && !launcherRunning(p) && pinned(p) {
+            if let t = attachTried[p.id], Date().timeIntervalSince(t) < 30 { continue }
+            guard FileManager.default.fileExists(atPath: launcherURL(p).path) else { continue }
+            attachTried[p.id] = Date()
+            run("/usr/bin/open", ["-g", "-a", launcherURL(p).path, "--args", "--attach"])
+        }
+    }
+
     /// One dot per profile, in its color, filled when open.
     func refreshStatusTitle() {
         guard let b = statusItem?.button else { return }
@@ -469,7 +509,13 @@ final class Delegate: NSObject, NSApplicationDelegate, NSMenuDelegate {
         guard let p = profile(s) else { return }
         let u = launcherURL(p)
         ensureLauncher(p)
-        if dockApps().contains(where: { dockURL($0) == u.absoluteString }) { dockEdit(old: u, new: nil) } else { dockEdit(old: nil, new: u) }
+        if pinned(p) {
+            dockEdit(old: u, new: nil)
+            launcherApp(p)?.terminate()   // a running launcher would keep the icon in the Dock
+        } else {
+            dockEdit(old: nil, new: u)
+            attachTried[p.id] = nil       // its dot comes back on the next refresh if the profile is open
+        }
     }
 
     @objc func toggleLogin(_ s: NSMenuItem) {
