@@ -4,7 +4,15 @@ Several Claude Desktop accounts side by side on one Mac, one Dock icon each.
 
 **Unofficial.** Not made, endorsed or supported by Anthropic. It never modifies Claude Desktop; it only starts it.
 
-**Page, with screenshots and the full list of what it puts on your Mac:** https://make-become.github.io/claude-switcher/
+**Page:** https://make-become.github.io/claude-switcher/ · **Details** (what a profile is on disk, everything it puts on your Mac): https://make-become.github.io/claude-switcher/details.html
+
+## Install
+
+```bash
+curl -fsSL https://make-become.github.io/claude-switcher/install.sh | sh
+```
+
+It downloads the latest release into `~/Applications`, clears the download quarantine (the app is not notarised) and opens it. Read it first: [`docs/install.sh`](docs/install.sh).
 
 ## What it does
 

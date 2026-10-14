@@ -1,0 +1,64 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Claude Switcher · Details</title>
+<meta name="description" content="What Claude Switcher does, what a profile is on disk, and everything it puts on your Mac.">
+<link rel="icon" href="img/app-icon.png">
+<link rel="stylesheet" href="style.css">
+<script src="i18n.js" defer></script>
+</head>
+<body>
+<main>
+  <header>
+    <img src="img/app-icon.png" alt="">
+    <h1>Claude Switcher</h1>
+  </header>
+  <p><a href="index.html" data-keep-lang data-i18n="back">← Back</a> · <a href="https://github.com/make-become/claude-switcher" data-i18n="source">Source code on GitHub</a></p>
+
+  <h2 data-i18n="whatH">What it does</h2>
+  <ul data-i18n="whatList"></ul>
+
+  <h2 data-i18n="folderH">Is a profile a folder on my disk?</h2>
+  <p data-i18n="folderP1"></p>
+  <p data-i18n="folderP2"></p>
+
+  <h2 data-i18n="diskH">Everything it puts on your Mac</h2>
+  <p class="muted" data-i18n="diskIntro"></p>
+  <table>
+    <thead><tr><th data-i18n="thWhere">Where</th><th data-i18n="thWhat">What it is</th></tr></thead>
+    <tbody>
+      <tr><td><code>~/Applications/Claude Switcher.app</code></td><td data-i18n="rApp"></td></tr>
+      <tr><td><code>~/Applications/Claude &lt;Name&gt;.app</code></td><td data-i18n="rLauncher"></td></tr>
+      <tr><td><code>~/Library/Application Support/Claude</code></td><td data-i18n="rDefault"></td></tr>
+      <tr><td><code>~/Library/Application Support/Claude-&lt;Name&gt;</code></td><td data-i18n="rExtra"></td></tr>
+      <tr><td><code>~/Library/Application Support/Claude Switcher/profiles.json</code></td><td data-i18n="rList"></td></tr>
+      <tr><td><code>~/Library/LaunchAgents/com.makebecome.claude-switcher.profile.&lt;id&gt;.plist</code></td><td data-i18n="rAgent"></td></tr>
+      <tr><td>Dock</td><td data-i18n="rDock"></td></tr>
+    </tbody>
+  </table>
+
+  <h3 data-i18n="deleteH">What "Delete profile" does</h3>
+  <p data-i18n="deleteP"></p>
+
+  <h3 data-i18n="uninstallH">Uninstalling</h3>
+  <p data-i18n="uninstallP"></p>
+
+  <h2 data-i18n="loginH">Why "Safe login"</h2>
+  <p data-i18n="loginP"></p>
+
+  <h2 data-i18n="installerH">What the installer does</h2>
+  <p data-i18n="installerP"></p>
+  <p data-i18n="manualP"></p>
+
+  <h2 data-i18n="knowH">Good to know</h2>
+  <ul data-i18n="knowList"></ul>
+
+  <footer>
+    <span data-i18n="footer">MIT licence · make-become · Claude is a trademark of Anthropic; this project is not affiliated with Anthropic.</span>
+    <span class="langs"></span>
+  </footer>
+</main>
+</body>
+</html>

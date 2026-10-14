@@ -4,156 +4,38 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Claude Switcher</title>
-<meta name="description" content="Several Claude Desktop accounts side by side on one Mac, one Dock icon each.">
+<meta name="description" content="Several Claude Desktop accounts at the same time on one Mac, one Dock icon each.">
 <link rel="icon" href="img/app-icon.png">
-<style>
-  :root {
-    --bg: #fbfaf8; --fg: #1d1d1f; --muted: #6e6e73; --card: #ffffff; --line: #e6e3de;
-    --accent: #1a73f2; --code: #f2f0ec;
-    --g: #33b34d; --b: #1a73f2; --p: #9940d9; --o: #f28c1a;
-  }
-  @media (prefers-color-scheme: dark) {
-    :root { --bg: #141414; --fg: #f2f2f2; --muted: #a1a1a6; --card: #1e1e1e; --line: #2f2f2f; --accent: #5aa0ff; --code: #242424; }
-  }
-  * { box-sizing: border-box; }
-  body { margin: 0; background: var(--bg); color: var(--fg);
-         font: 17px/1.55 -apple-system, BlinkMacSystemFont, "Segoe UI", system-ui, sans-serif; }
-  main { max-width: 760px; margin: 0 auto; padding: 48px 16px 80px; }
-  header { display: flex; gap: 18px; align-items: center; margin-bottom: 8px; }
-  header img { width: 72px; height: 72px; }
-  h1 { font-size: 34px; margin: 0; letter-spacing: -0.02em; }
-  .tag { color: var(--muted); margin: 4px 0 0; }
-  h2 { font-size: 22px; margin: 48px 0 12px; letter-spacing: -0.01em; }
-  p, li { color: var(--fg); }
-  .muted { color: var(--muted); }
-  a { color: var(--accent); }
-  code { background: var(--code); padding: 2px 6px; border-radius: 6px; font-size: 0.88em; overflow-wrap: anywhere; }
-  pre { background: var(--code); padding: 14px 16px; border-radius: 10px; overflow-x: auto; font-size: 14px; }
-  pre code { background: none; padding: 0; }
-  .note { border: 1px solid var(--line); background: var(--card); border-radius: 12px; padding: 14px 18px; margin: 20px 0; }
-  .shots { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin: 24px 0; align-items: start; }
-  .shots figure { margin: 0; }
-  .shots img { width: 100%; height: auto; border-radius: 12px; }
-  figcaption { color: var(--muted); font-size: 14px; margin-top: 6px; }
-  .dots { font-size: 20px; letter-spacing: 2px; }
-  .dots .g { color: var(--g); } .dots .b { color: var(--b); } .dots .o { color: var(--o); }
-  table { width: 100%; border-collapse: collapse; font-size: 15px; }
-  td, th { text-align: left; vertical-align: top; padding: 10px 8px; border-bottom: 1px solid var(--line); }
-  th { color: var(--muted); font-weight: 600; }
-  td:first-child { width: 46%; }
-  .btn { display: inline-block; background: var(--accent); color: #fff; text-decoration: none; padding: 10px 18px;
-         border-radius: 10px; font-weight: 600; margin: 4px 8px 4px 0; }
-  .btn.alt { background: transparent; color: var(--accent); border: 1px solid var(--accent); }
-  footer { margin-top: 64px; color: var(--muted); font-size: 14px; }
-  @media (max-width: 600px) {
-    .shots { grid-template-columns: 1fr; }
-    td:first-child { width: auto; }
-    table, tbody, tr, td { display: block; } tr { border-bottom: 1px solid var(--line); padding: 6px 0; } td { border: 0; padding: 4px 0; }
-    thead { display: none; }
-  }
-</style>
+<link rel="stylesheet" href="style.css">
+<script src="i18n.js" defer></script>
 </head>
 <body>
 <main>
   <header>
     <img src="img/app-icon.png" alt="">
-    <div>
-      <h1>Claude Switcher</h1>
-      <p class="tag">Several Claude Desktop accounts side by side on one Mac. One Dock icon each, no logging out.</p>
-    </div>
+    <h1>Claude Switcher</h1>
   </header>
 
-  <p>
-    <a class="btn" href="https://github.com/make-become/claude-switcher/releases/latest">Download for macOS</a>
-    <a class="btn alt" href="https://github.com/make-become/claude-switcher">Source on GitHub</a>
-  </p>
-
-  <div class="note">
-    <strong>Unofficial.</strong> Claude Switcher is a small open-source tool by make-become. It is not made, endorsed or
-    supported by Anthropic. It does not change Claude Desktop in any way: it only starts it.
-  </div>
-
-  <h2>What it does</h2>
-  <ul>
-    <li><strong>One profile per account.</strong> Personal, Work, a client: each one is its own Claude Desktop, signed in to its own account, open at the same time as the others.</li>
-    <li><strong>One Dock icon per profile.</strong> Each has a coloured letter, and the dot under it means "this one is open". Click it to bring that account to the front. Don't want it in the Dock? <em>Manage → Show its icon in the Dock</em> turns it off.</li>
-    <li><strong>Never two copies of the same profile.</strong> If a profile is already open, it is brought forward instead of started again.</li>
-    <li><strong>A menu where your mouse is, and in the menu bar.</strong> The menu bar shows one dot per profile <span class="dots"><span class="g">●</span><span class="b">●</span><span class="o">○</span></span>, filled when it is open.</li>
-    <li><strong>Keyboard shortcuts.</strong> <code>⌥⌘1</code>, <code>⌥⌘2</code>, <code>⌥⌘3</code>… bring a profile forward from any app.</li>
-    <li><strong>Safe login.</strong> It closes the other profiles while you sign in, so the login lands in the right one (see below).</li>
-    <li><strong>Speaks your language.</strong> English, Italiano, Español, Français, Deutsch, picked from your Mac's settings.</li>
-  </ul>
+  <p class="lead" data-i18n="lead">Use several Claude Desktop accounts at the same time on one Mac.</p>
 
   <div class="shots">
-    <figure><img src="img/menu-en.png" alt="The Claude Switcher menu listing three profiles with their keyboard shortcuts"><figcaption>The menu: open profiles are filled dots.</figcaption></figure>
-    <figure><img src="img/edit-en.png" alt="The dialog for editing a profile: name, letter, colour and e-mail"><figcaption>Each profile has a name, a letter and a colour.</figcaption></figure>
+    <img data-i18n-src="img/menu-{lang}.png" src="img/menu-en.png" alt="" data-i18n-alt="altMenu">
+    <img data-i18n-src="img/edit-{lang}.png" src="img/edit-en.png" alt="" data-i18n-alt="altEdit">
   </div>
 
-  <h2>Is a profile a folder on my disk?</h2>
-  <p>
-    Yes, and that is all it is. Claude Desktop keeps everything about your account (the login, settings, caches) in one
-    folder. A profile is simply <em>another</em> such folder, so each account keeps its own things and none of them can
-    see or overwrite the others.
-  </p>
-  <p>
-    Your first profile is Claude's normal folder, which Claude Switcher never touches. Each extra profile gets a folder
-    next to it, created by Claude Desktop itself the first time that profile opens.
-  </p>
+  <h2 data-i18n="installH">Install</h2>
+  <p class="muted" data-i18n="installP">Paste this in the Terminal:</p>
+  <div class="copy"><span id="cmd">curl -fsSL https://make-become.github.io/claude-switcher/install.sh | sh</span><button data-copy="cmd" data-i18n="copy">Copy</button></div>
 
-  <h2>Everything it puts on your Mac</h2>
-  <p class="muted">The complete list. Nothing is installed anywhere else, nothing is sent anywhere, and Claude.app itself is not modified.</p>
-  <table>
-    <thead><tr><th>Where</th><th>What it is</th></tr></thead>
-    <tbody>
-      <tr><td><code>~/Applications/Claude Switcher.app</code></td><td>The app, where you put it. About 1 MB.</td></tr>
-      <tr><td><code>~/Applications/Claude &lt;Name&gt;.app</code></td><td>One small launcher per profile: the icon you click in the Dock. About 1 MB each.</td></tr>
-      <tr><td><code>~/Library/Application Support/Claude</code></td><td>Claude's own folder, used by your first profile. Left as it is.</td></tr>
-      <tr><td><code>~/Library/Application Support/Claude-&lt;Name&gt;</code></td><td>The data of each extra profile: its login and settings. Made by Claude Desktop, not by Claude Switcher.</td></tr>
-      <tr><td><code>~/Library/Application Support/Claude Switcher/profiles.json</code></td><td>The list of your profiles: name, letter, colour, the e-mail you typed. A few hundred bytes.</td></tr>
-      <tr><td><code>~/Library/LaunchAgents/com.makebecome.claude-switcher.profile.&lt;id&gt;.plist</code></td><td>Only if you tick "Open when the Mac starts" for a profile. Untick it and the file goes away.</td></tr>
-      <tr><td>Your Dock</td><td>An icon per profile is added when you create it and removed when you delete it.</td></tr>
-    </tbody>
-  </table>
+  <h2 data-i18n="askH">Or ask Claude to do it</h2>
+  <p class="muted" data-i18n="askP">Paste this in Claude Code or Claude Desktop:</p>
+  <div class="copy"><span id="prompt" data-i18n="prompt">Install Claude Switcher on my Mac.</span><button data-copy="prompt" data-i18n="copy">Copy</button></div>
 
-  <h3>What "Delete profile" does</h3>
-  <p>
-    It removes the profile's icon from the Dock and the menu, and moves its launcher to the Trash. It does
-    <strong>not</strong> delete the profile's data folder: your account data stays where it is, and making a profile
-    with the same name later finds it again. To really erase it, drag the <code>Claude-&lt;Name&gt;</code> folder to the Trash yourself.
-  </p>
-
-  <h3>Uninstalling</h3>
-  <p>Quit Claude Switcher, delete the profiles you made (or just drag their launchers out of <code>~/Applications</code>), then drag <code>Claude Switcher.app</code> to the Trash. Your Claude accounts and their folders are left untouched.</p>
-
-  <h2>Why "Safe login"</h2>
-  <p>
-    When you sign in, Claude Desktop sends you to the browser, and the browser hands the login back to "Claude".
-    With several profiles open, macOS picks one of them, and it may not be the one you were signing in to.
-    Safe login closes the other profiles for that moment, so there is only one place for the login to arrive.
-  </p>
-
-  <h2>Install</h2>
-  <ol>
-    <li>Download the zip from the <a href="https://github.com/make-become/claude-switcher/releases/latest">latest release</a> and unzip it.</li>
-    <li>Move <code>Claude Switcher.app</code> to <code>Applications</code> in your home folder (or the main one).</li>
-    <li>The app is not notarised by Apple, so the first time <strong>right-click it and choose Open</strong>, then confirm.</li>
-    <li>Click it: the menu appears where your mouse is. Choose <em>New profile…</em> to add your second account.</li>
-  </ol>
-  <p class="muted">Needs macOS 13 or later and Claude Desktop in <code>/Applications</code>. To build it yourself instead:</p>
-  <pre><code>git clone https://github.com/make-become/claude-switcher
-cd claude-switcher
-./build.sh</code></pre>
-
-  <h2>Good to know</h2>
-  <ul>
-    <li>The e-mail next to a profile is a label you type; Claude Desktop does not store it in a place other apps can read. If two profiles end up on the same account, the menu says so.</li>
-    <li>Extra profiles are started with a standard launch option for this kind of app (<code>--user-data-dir</code>). Claude Desktop does not document it, so an update could change how it behaves.</li>
-    <li>In extra profiles, Claude Desktop turns off pairing with the Claude browser extension.</li>
-    <li>While a profile is open you also see Claude Desktop's own icon in the Dock, next to the coloured one. Hiding it would mean modifying Claude.app, which would break its signature and its updates, so Claude Switcher does not do it.</li>
-  </ul>
+  <a class="btn" href="details.html" data-keep-lang data-i18n="more">More info</a>
 
   <footer>
-    MIT licence · made by <a href="https://github.com/make-become">make-become</a> · Claude is a trademark of Anthropic; this project is not affiliated with Anthropic.
+    <span data-i18n="unofficial">Unofficial. Not affiliated with Anthropic.</span>
+    <span class="langs"></span>
   </footer>
 </main>
 </body>
