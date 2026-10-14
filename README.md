@@ -37,6 +37,7 @@ Deleting a profile removes its icon and launcher, **not** its data folder.
 Needs macOS 13+ and the Xcode command line tools. `swift tools/make-icon.swift` regenerates the app icon;
 `ClaudeSwitcher --snapshot <dir>` renders the screenshots used on the page (with `CLAUDE_SWITCHER_PROFILES`
 pointing at demo profiles and `CLAUDE_SWITCHER_LANG` choosing the language).
+`ClaudeSwitcher --dock <profile id> on|off` pins or unpins a profile's Dock icon from a script.
 
 ## How it works
 

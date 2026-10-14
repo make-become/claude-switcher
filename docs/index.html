@@ -76,7 +76,7 @@
   <h2>What it does</h2>
   <ul>
     <li><strong>One profile per account.</strong> Personal, Work, a client: each one is its own Claude Desktop, signed in to its own account, open at the same time as the others.</li>
-    <li><strong>One Dock icon per profile.</strong> Each has a coloured letter, and the dot under it means "this one is open". Click it to bring that account to the front.</li>
+    <li><strong>One Dock icon per profile.</strong> Each has a coloured letter, and the dot under it means "this one is open". Click it to bring that account to the front. Don't want it in the Dock? <em>Manage → Show its icon in the Dock</em> turns it off.</li>
     <li><strong>Never two copies of the same profile.</strong> If a profile is already open, it is brought forward instead of started again.</li>
     <li><strong>A menu where your mouse is, and in the menu bar.</strong> The menu bar shows one dot per profile <span class="dots"><span class="g">●</span><span class="b">●</span><span class="o">○</span></span>, filled when it is open.</li>
     <li><strong>Keyboard shortcuts.</strong> <code>⌥⌘1</code>, <code>⌥⌘2</code>, <code>⌥⌘3</code>… bring a profile forward from any app.</li>
@@ -149,6 +149,7 @@ cd claude-switcher
     <li>The e-mail next to a profile is a label you type; Claude Desktop does not store it in a place other apps can read. If two profiles end up on the same account, the menu says so.</li>
     <li>Extra profiles are started with a standard launch option for this kind of app (<code>--user-data-dir</code>). Claude Desktop does not document it, so an update could change how it behaves.</li>
     <li>In extra profiles, Claude Desktop turns off pairing with the Claude browser extension.</li>
+    <li>While a profile is open you also see Claude Desktop's own icon in the Dock, next to the coloured one. Hiding it would mean modifying Claude.app, which would break its signature and its updates, so Claude Switcher does not do it.</li>
   </ul>
 
   <footer>

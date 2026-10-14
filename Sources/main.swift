@@ -160,7 +160,7 @@ func renderIcon(_ p: Profile, px: Int) -> Data? {
 
 /// Bump on every build: codesign rewrites each launcher's copy of the binary, so
 /// bytes cannot be compared, and this is what tells a launcher it is out of date.
-let switcherVersion = "3.0"
+let switcherVersion = "3.1"
 func iconStamp(_ p: Profile) -> String { "\(p.name)|\(p.color)|\(p.letter)" }
 
 /// (Re)build a profile's launcher when its binary or look is out of date.
@@ -293,6 +293,15 @@ final class Delegate: NSObject, NSApplicationDelegate, NSMenuDelegate {
         if let i = CommandLine.arguments.firstIndex(of: "--snapshot"), i + 1 < CommandLine.arguments.count {
             snapshot(to: CommandLine.arguments[i + 1]); return
         }
+        // Scriptable: `ClaudeSwitcher --dock <profile id> on|off` pins or unpins a profile's icon and exits.
+        if let i = CommandLine.arguments.firstIndex(of: "--dock"), i + 2 < CommandLine.arguments.count {
+            let a = CommandLine.arguments
+            if let p = profiles.first(where: { $0.id == a[i + 1] }) {
+                ensureLauncher(p)
+                a[i + 2] == "on" ? dockEdit(old: nil, new: launcherURL(p)) : dockEdit(old: launcherURL(p), new: nil)
+            }
+            exit(0)
+        }
         guard FileManager.default.fileExists(atPath: claudeBin) else {
             NSApp.activate(ignoringOtherApps: true)
             let a = NSAlert(); a.messageText = t("noClaude"); a.runModal(); NSApp.terminate(nil); return
@@ -351,6 +360,9 @@ final class Delegate: NSObject, NSApplicationDelegate, NSMenuDelegate {
         login.state = p.openAtLogin == true ? .on : .off
         m.addItem(login)
         if launcherID == nil {
+            let dock = item(t("showInDock"), #selector(toggleDock(_:)), p.id)
+            dock.state = dockApps().contains { dockURL($0) == launcherURL(p).absoluteString } ? .on : .off
+            m.addItem(dock)
             m.addItem(.separator())
             m.addItem(item(t("edit"), #selector(editItem(_:)), p.id))
             m.addItem(item(t("delete"), #selector(deleteItem(_:)), p.id))
@@ -449,6 +461,15 @@ final class Delegate: NSObject, NSApplicationDelegate, NSMenuDelegate {
     @objc func quitSwitcher(_ s: NSMenuItem) { NSApp.terminate(nil) }
     @objc func toggleSwitcherAtLogin(_ s: NSMenuItem) {
         if SMAppService.mainApp.status == .enabled { try? SMAppService.mainApp.unregister() } else { try? SMAppService.mainApp.register() }
+    }
+
+    /// Pin or unpin the profile's own icon. The launcher stays in ~/Applications either way,
+    /// and is rebuilt at start if it went missing, so pinning it again always works.
+    @objc func toggleDock(_ s: NSMenuItem) {
+        guard let p = profile(s) else { return }
+        let u = launcherURL(p)
+        ensureLauncher(p)
+        if dockApps().contains(where: { dockURL($0) == u.absoluteString }) { dockEdit(old: u, new: nil) } else { dockEdit(old: nil, new: u) }
     }
 
     @objc func toggleLogin(_ s: NSMenuItem) {

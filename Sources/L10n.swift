@@ -29,6 +29,8 @@ private let strings: [String: [String: String]] = [
                   "fr": "Connexion sûre (ferme les autres)", "de": "Sicher anmelden (schließt die anderen)"],
     "openAtLogin": ["en": "Open when the Mac starts", "it": "Apri all'avvio del Mac", "es": "Abrir al iniciar el Mac",
                     "fr": "Ouvrir au démarrage du Mac", "de": "Beim Start des Mac öffnen"],
+    "showInDock": ["en": "Show its icon in the Dock", "it": "Mostra la sua icona nel Dock", "es": "Mostrar su icono en el Dock",
+                   "fr": "Afficher son icône dans le Dock", "de": "Symbol im Dock zeigen"],
     "edit": ["en": "Edit…", "it": "Modifica…", "es": "Editar…", "fr": "Modifier…", "de": "Bearbeiten…"],
     "delete": ["en": "Delete profile…", "it": "Elimina profilo…", "es": "Eliminar perfil…", "fr": "Supprimer le profil…", "de": "Profil löschen…"],
     "manage": ["en": "Manage", "it": "Gestisci", "es": "Gestionar", "fr": "Gérer", "de": "Verwalten"],
