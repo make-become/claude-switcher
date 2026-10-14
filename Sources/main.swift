@@ -181,7 +181,7 @@ func renderIcon(_ p: Profile, px: Int) -> Data? {
 
 /// Bump on every build: codesign rewrites each launcher's copy of the binary, so
 /// bytes cannot be compared, and this is what tells a launcher it is out of date.
-let switcherVersion = "3.2"
+let switcherVersion = "1.0"
 func iconStamp(_ p: Profile) -> String { "\(p.name)|\(p.color)|\(p.letter)" }
 
 /// (Re)build a profile's launcher when its binary or look is out of date.
@@ -247,6 +247,14 @@ func dockEdit(old: URL?, new: URL?) {
     CFPreferencesSetAppValue("persistent-apps" as CFString, apps as CFArray, "com.apple.dock" as CFString)
     CFPreferencesAppSynchronize("com.apple.dock" as CFString)
     run("/usr/bin/killall", ["Dock"])
+}
+
+/// After the app moved (say ~/Applications → /Applications), point its Dock icon at where it now is.
+func adoptDockEntry() {
+    let here = Bundle.main.bundleURL.absoluteString
+    guard let old = dockApps().compactMap(dockURL).first(where: { $0 != here && $0.hasSuffix("/Claude%20Switcher.app/") }),
+          let oldURL = URL(string: old) else { return }
+    dockEdit(old: oldURL, new: Bundle.main.bundleURL)
 }
 
 // Open-at-login for one profile: a LaunchAgent that opens its launcher.
@@ -331,6 +339,7 @@ final class Delegate: NSObject, NSApplicationDelegate, NSMenuDelegate {
         if launcherID != nil { startLauncher(); return }
         let ps = profiles
         ps.forEach { ensureLauncher($0) }
+        adoptDockEntry()
         hotkeyAction = { [weak self] i in
             guard let self else { return }
             let ps = self.profiles

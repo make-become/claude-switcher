@@ -12,7 +12,7 @@ Several Claude Desktop accounts side by side on one Mac, one Dock icon each.
 curl -fsSL https://make-become.github.io/claude-switcher/install.sh | sh
 ```
 
-It downloads the latest release into `~/Applications`, clears the download quarantine (the app is not notarised) and opens it. Read it first: [`docs/install.sh`](docs/install.sh).
+It downloads the latest release into `/Applications` (where Finder and Spotlight look; `~/Applications` if that is not writable), clears the download quarantine (the app is not notarised) and opens it. Read it first: [`docs/install.sh`](docs/install.sh).
 
 ## What it does
 
@@ -31,6 +31,7 @@ It downloads the latest release into `~/Applications`, clears the download quara
 | `~/Library/Application Support/Claude` | Claude's own folder: your first profile. Never touched. |
 | `~/Library/Application Support/Claude-<Name>` | Each extra profile's data, created by Claude Desktop on first launch. |
 | `~/Applications/Claude <Name>.app` | The profile's launcher (its Dock icon). |
+| `/Applications/Claude Switcher.app` | The app itself. |
 | `~/Library/Application Support/Claude Switcher/profiles.json` | The profile list. |
 | `~/Library/LaunchAgents/com.makebecome.claude-switcher.profile.<id>.plist` | Only with "Open when the Mac starts". |
 
