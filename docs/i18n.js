@@ -10,7 +10,7 @@ en: {
   installH: "Install", installP: "Paste this in the Terminal:",
   askH: "Or ask Claude to do it", askP: "Paste this in Claude Code or in Claude Desktop (with access to your Mac):",
   prompt: `Install Claude Switcher on my Mac: run \`${CMD}\` in the terminal, then tell me whether its menu opened. Details: https://make-become.github.io/claude-switcher/details.html`,
-  copy: "Copy", copied: "Copied", more: "More info", unofficial: "Unofficial. Not affiliated with Anthropic.",
+  copy: "Copy", copied: "Copied", more: "More info", unofficial: "A <a href="https://make-become.github.io/">make become</a> project. Unofficial, not affiliated with Anthropic.",
   back: "← Back", source: "Source code on GitHub",
   whatH: "What it does",
   whatList: `<li><strong>One profile per account.</strong> Each profile is its own Claude Desktop, signed in to its own account, open at the same time as the others.</li>
@@ -47,7 +47,7 @@ en: {
 <li>Extra profiles are started with a standard launch option of this kind of app (<code>--user-data-dir</code>). Claude Desktop does not document it, so an update could change how it behaves.</li>
 <li>In extra profiles Claude Desktop turns off pairing with the Claude browser extension.</li>
 <li>While a profile is open you also see Claude Desktop's own icon in the Dock, next to the coloured one. Hiding it would mean modifying Claude.app, which breaks its signature and its updates, so Claude Switcher does not do it.</li>`,
-  footer: "MIT licence · make-become · Claude is a trademark of Anthropic; this project is not affiliated with Anthropic.",
+  footer: "MIT licence · <a href="https://make-become.github.io/">make become</a> · Claude is a trademark of Anthropic; this project is not affiliated with Anthropic.",
 },
 it: {
   lead: "Usa più account di Claude Desktop insieme sullo stesso Mac: personale, lavoro, un cliente. Ognuno ha la sua icona colorata nel Dock, il suo login e la sua scorciatoia, e non si apre mai due volte. Gratuito, open source, non ufficiale.",
@@ -55,7 +55,7 @@ it: {
   installH: "Installa", installP: "Incolla questo nel Terminale:",
   askH: "Oppure chiedi a Claude di farlo", askP: "Incolla questo in Claude Code o in Claude Desktop (con accesso al tuo Mac):",
   prompt: `Installa Claude Switcher sul mio Mac: esegui \`${CMD}\` nel terminale, poi dimmi se il suo menu si è aperto. Dettagli: https://make-become.github.io/claude-switcher/details.html`,
-  copy: "Copia", copied: "Copiato", more: "Più informazioni", unofficial: "Non ufficiale. Non affiliato ad Anthropic.",
+  copy: "Copia", copied: "Copiato", more: "Più informazioni", unofficial: "Un progetto <a href="https://make-become.github.io/">make become</a>. Non ufficiale, non affiliato ad Anthropic.",
   back: "← Indietro", source: "Codice sorgente su GitHub",
   whatH: "Cosa fa",
   whatList: `<li><strong>Un profilo per account.</strong> Ogni profilo è un Claude Desktop a sé, collegato al suo account, aperto insieme agli altri.</li>
@@ -92,7 +92,7 @@ it: {
 <li>I profili in più si avviano con un'opzione standard di questo tipo di app (<code>--user-data-dir</code>). Claude Desktop non la documenta, quindi un aggiornamento potrebbe cambiarne il comportamento.</li>
 <li>Nei profili in più Claude Desktop disattiva il collegamento con l'estensione Claude per il browser.</li>
 <li>Mentre un profilo è aperto vedi nel Dock anche l'icona di Claude Desktop, accanto a quella colorata. Nasconderla vorrebbe dire modificare Claude.app, rompendone la firma e gli aggiornamenti, quindi Claude Switcher non lo fa.</li>`,
-  footer: "Licenza MIT · make-become · Claude è un marchio di Anthropic; questo progetto non è affiliato ad Anthropic.",
+  footer: "Licenza MIT · <a href="https://make-become.github.io/">make become</a> · Claude è un marchio di Anthropic; questo progetto non è affiliato ad Anthropic.",
 },
 es: {
   lead: "Usa varias cuentas de Claude Desktop a la vez en un mismo Mac: personal, trabajo, un cliente. Cada una tiene su propio icono de color en el Dock, su propio inicio de sesión y su propio atajo, y nunca se abre dos veces. Gratis, de código abierto, no oficial.",
@@ -100,7 +100,7 @@ es: {
   installH: "Instalar", installP: "Pega esto en el Terminal:",
   askH: "O pídeselo a Claude", askP: "Pega esto en Claude Code o en Claude Desktop (con acceso a tu Mac):",
   prompt: `Instala Claude Switcher en mi Mac: ejecuta \`${CMD}\` en el terminal y dime si se abrió su menú. Detalles: https://make-become.github.io/claude-switcher/details.html`,
-  copy: "Copiar", copied: "Copiado", more: "Más información", unofficial: "No oficial. Sin relación con Anthropic.",
+  copy: "Copiar", copied: "Copiado", more: "Más información", unofficial: "Un proyecto de <a href="https://make-become.github.io/">make become</a>. No oficial, sin relación con Anthropic.",
   back: "← Volver", source: "Código fuente en GitHub",
   whatH: "Qué hace",
   whatList: `<li><strong>Un perfil por cuenta.</strong> Cada perfil es su propio Claude Desktop, con su propia cuenta, abierto a la vez que los demás.</li>
@@ -137,7 +137,7 @@ es: {
 <li>Los perfiles extra se inician con una opción estándar de este tipo de apps (<code>--user-data-dir</code>). Claude Desktop no la documenta, así que una actualización podría cambiar su comportamiento.</li>
 <li>En los perfiles extra Claude Desktop desactiva el emparejamiento con la extensión de Claude para el navegador.</li>
 <li>Mientras un perfil está abierto también ves en el Dock el icono de Claude Desktop, junto al de color. Ocultarlo exigiría modificar Claude.app, rompiendo su firma y sus actualizaciones, así que Claude Switcher no lo hace.</li>`,
-  footer: "Licencia MIT · make-become · Claude es una marca de Anthropic; este proyecto no está afiliado a Anthropic.",
+  footer: "Licencia MIT · <a href="https://make-become.github.io/">make become</a> · Claude es una marca de Anthropic; este proyecto no está afiliado a Anthropic.",
 },
 fr: {
   lead: "Utilisez plusieurs comptes Claude Desktop en même temps sur un seul Mac : perso, travail, un client. Chacun a sa propre icône colorée dans le Dock, sa propre connexion et son propre raccourci, et n'est jamais ouvert deux fois. Gratuit, open source, non officiel.",
@@ -145,7 +145,7 @@ fr: {
   installH: "Installer", installP: "Collez ceci dans le Terminal :",
   askH: "Ou demandez à Claude de le faire", askP: "Collez ceci dans Claude Code ou dans Claude Desktop (avec accès à votre Mac) :",
   prompt: `Installe Claude Switcher sur mon Mac : exécute \`${CMD}\` dans le terminal, puis dis-moi si son menu s'est ouvert. Détails : https://make-become.github.io/claude-switcher/details.html`,
-  copy: "Copier", copied: "Copié", more: "Plus d'infos", unofficial: "Non officiel. Sans lien avec Anthropic.",
+  copy: "Copier", copied: "Copié", more: "Plus d'infos", unofficial: "Un projet <a href="https://make-become.github.io/">make become</a>. Non officiel, sans lien avec Anthropic.",
   back: "← Retour", source: "Code source sur GitHub",
   whatH: "Ce qu'il fait",
   whatList: `<li><strong>Un profil par compte.</strong> Chaque profil est son propre Claude Desktop, connecté à son propre compte, ouvert en même temps que les autres.</li>
@@ -182,7 +182,7 @@ fr: {
 <li>Les profils supplémentaires sont lancés avec une option standard de ce type d'app (<code>--user-data-dir</code>). Claude Desktop ne la documente pas, une mise à jour pourrait donc changer son comportement.</li>
 <li>Dans les profils supplémentaires, Claude Desktop désactive le jumelage avec l'extension Claude pour le navigateur.</li>
 <li>Quand un profil est ouvert, vous voyez aussi l'icône de Claude Desktop dans le Dock, à côté de l'icône colorée. La masquer obligerait à modifier Claude.app, ce qui casse sa signature et ses mises à jour : Claude Switcher ne le fait donc pas.</li>`,
-  footer: "Licence MIT · make-become · Claude est une marque d'Anthropic ; ce projet n'est pas affilié à Anthropic.",
+  footer: "Licence MIT · <a href="https://make-become.github.io/">make become</a> · Claude est une marque d'Anthropic ; ce projet n'est pas affilié à Anthropic.",
 },
 de: {
   lead: "Mehrere Claude-Desktop-Konten gleichzeitig auf einem Mac: privat, Arbeit, ein Kunde. Jedes hat sein eigenes farbiges Dock-Symbol, seine eigene Anmeldung und sein eigenes Tastenkürzel, und es wird nie doppelt geöffnet. Kostenlos, Open Source, inoffiziell.",
@@ -190,7 +190,7 @@ de: {
   installH: "Installieren", installP: "Das hier ins Terminal einfügen:",
   askH: "Oder Claude darum bitten", askP: "Das hier in Claude Code oder Claude Desktop (mit Zugriff auf deinen Mac) einfügen:",
   prompt: `Installiere Claude Switcher auf meinem Mac: führe \`${CMD}\` im Terminal aus und sag mir dann, ob sich sein Menü geöffnet hat. Details: https://make-become.github.io/claude-switcher/details.html`,
-  copy: "Kopieren", copied: "Kopiert", more: "Mehr Infos", unofficial: "Inoffiziell. Nicht mit Anthropic verbunden.",
+  copy: "Kopieren", copied: "Kopiert", more: "Mehr Infos", unofficial: "Ein Projekt von <a href="https://make-become.github.io/">make become</a>. Inoffiziell, nicht mit Anthropic verbunden.",
   back: "← Zurück", source: "Quellcode auf GitHub",
   whatH: "Was es macht",
   whatList: `<li><strong>Ein Profil pro Konto.</strong> Jedes Profil ist ein eigenes Claude Desktop mit eigenem Konto, gleichzeitig mit den anderen geöffnet.</li>
@@ -227,7 +227,7 @@ de: {
 <li>Weitere Profile werden mit einer Standard-Startoption solcher Apps gestartet (<code>--user-data-dir</code>). Claude Desktop dokumentiert sie nicht, ein Update könnte das Verhalten also ändern.</li>
 <li>In weiteren Profilen schaltet Claude Desktop die Kopplung mit der Claude-Browsererweiterung ab.</li>
 <li>Solange ein Profil offen ist, siehst du im Dock auch das Symbol von Claude Desktop neben dem farbigen. Es auszublenden hieße, Claude.app zu verändern, was Signatur und Updates kaputt macht, deshalb tut Claude Switcher das nicht.</li>`,
-  footer: "MIT-Lizenz · make-become · Claude ist eine Marke von Anthropic; dieses Projekt ist nicht mit Anthropic verbunden.",
+  footer: "MIT-Lizenz · <a href="https://make-become.github.io/">make become</a> · Claude ist eine Marke von Anthropic; dieses Projekt ist nicht mit Anthropic verbunden.",
 },
 };
 

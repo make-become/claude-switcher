@@ -44,3 +44,11 @@ footer { margin-top: 56px; color: var(--muted); font-size: 14px; display: flex; 
   td { border: 0; padding: 4px 0; } td:first-child { width: auto; } thead { display: none; }
   .langs a { margin: 0 8px 0 0; }
 }
+
+/* make become brand: the studio's dot and wordmark, as on make-become.github.io */
+.mb { display: inline-flex; align-items: center; gap: 10px; margin-bottom: 28px; color: var(--muted); text-decoration: none;
+      font: 500 15px/1 Syne, "Avenir Next", -apple-system, system-ui, sans-serif; letter-spacing: -0.01em; }
+.mb:hover { color: var(--fg); }
+.mb-dot { width: 9px; height: 9px; border-radius: 999px; background: #7fad9a; box-shadow: 0 0 0 4px rgba(183, 216, 200, 0.45); }
+.mb-name { color: var(--fg); font-weight: 600; }
+.mb-role { color: #7fad9a; }
