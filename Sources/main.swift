@@ -181,7 +181,7 @@ func renderIcon(_ p: Profile, px: Int) -> Data? {
 
 /// Bump on every build: codesign rewrites each launcher's copy of the binary, so
 /// bytes cannot be compared, and this is what tells a launcher it is out of date.
-let switcherVersion = "1.0"
+let switcherVersion = "1.0.1"
 func iconStamp(_ p: Profile) -> String { "\(p.name)|\(p.color)|\(p.letter)" }
 
 /// (Re)build a profile's launcher when its binary or look is out of date.
@@ -322,6 +322,8 @@ final class Delegate: NSObject, NSApplicationDelegate, NSMenuDelegate {
         if let i = CommandLine.arguments.firstIndex(of: "--snapshot"), i + 1 < CommandLine.arguments.count {
             snapshot(to: CommandLine.arguments[i + 1]); return
         }
+        // Used by the installer: put this copy in the Dock (when it was there before the update) and exit.
+        if CommandLine.arguments.contains("--pin-self") { dockEdit(old: nil, new: Bundle.main.bundleURL); exit(0) }
         // Scriptable: `ClaudeSwitcher --dock <profile id> on|off` pins or unpins a profile's icon and exits.
         if let i = CommandLine.arguments.firstIndex(of: "--dock"), i + 2 < CommandLine.arguments.count {
             let a = CommandLine.arguments

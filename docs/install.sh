@@ -33,6 +33,8 @@ mkdir -p "$DEST"
 # Quit a running copy so it can be replaced; the per-profile launchers update themselves on next start.
 pkill -f "Claude Switcher.app/Contents/MacOS/ClaudeSwitcher" 2>/dev/null || true
 sleep 1
+# Remember whether any copy was in the Dock: the Dock forgets an icon whose app is deleted.
+WAS_PINNED=$(defaults read com.apple.dock persistent-apps 2>/dev/null | grep -c 'Claude%20Switcher.app/' || true)
 rm -rf "$APP"
 # A copy left by an older install in the other Applications folder would be a second, stale app.
 for OLD in "/Applications/Claude Switcher.app" "$HOME/Applications/Claude Switcher.app"; do
@@ -40,6 +42,11 @@ for OLD in "/Applications/Claude Switcher.app" "$HOME/Applications/Claude Switch
 done
 ditto "$TMP/Claude Switcher.app" "$APP"
 xattr -dr com.apple.quarantine "$APP" 2>/dev/null || true
+
+if [ "${WAS_PINNED:-0}" -gt 0 ]; then
+  "$APP/Contents/MacOS/ClaudeSwitcher" --pin-self 2>/dev/null || true
+  sleep 2
+fi
 
 echo "→ Opening Claude Switcher"
 open "$APP"
