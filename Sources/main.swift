@@ -181,7 +181,7 @@ func renderIcon(_ p: Profile, px: Int) -> Data? {
 
 /// Bump on every build: codesign rewrites each launcher's copy of the binary, so
 /// bytes cannot be compared, and this is what tells a launcher it is out of date.
-let switcherVersion = "1.0.1"
+let switcherVersion = "1.0.2"
 func iconStamp(_ p: Profile) -> String { "\(p.name)|\(p.color)|\(p.letter)" }
 
 /// (Re)build a profile's launcher when its binary or look is out of date.
@@ -330,7 +330,7 @@ final class Delegate: NSObject, NSApplicationDelegate, NSMenuDelegate {
             if let p = profiles.first(where: { $0.id == a[i + 1] }) {
                 ensureLauncher(p)
                 if a[i + 2] == "on" { dockEdit(old: nil, new: launcherURL(p)) }
-                else { dockEdit(old: launcherURL(p), new: nil); launcherApp(p)?.terminate() }
+                else { dockEdit(old: launcherURL(p), new: nil); launcherApp(p)?.forceTerminate() }
             }
             exit(0)
         }
@@ -358,16 +358,16 @@ final class Delegate: NSObject, NSApplicationDelegate, NSMenuDelegate {
     /// Launcher: its Dock dot means "this profile is open". It opens the profile,
     /// then lives exactly as long as that Claude instance does.
     func startLauncher() {
-        guard let p = myProfile else { NSApp.terminate(nil); return }
+        guard let p = myProfile else { stopSelf(); return }
         // --attach: the profile was opened some other way; just show the dot, don't steal focus.
         if !CommandLine.arguments.contains("--attach") { openProfile(p) }
         // Unpinned (e.g. started by "Open when the Mac starts"): open the profile and get out of the Dock.
-        if !pinned(p) { NSApp.terminate(nil); return }
+        if !pinned(p) { stopSelf(); return }
         Timer.scheduledTimer(withTimeInterval: 3, repeats: true) { [weak self] _ in
             guard let self else { return }
-            guard let p = self.myProfile else { NSApp.terminate(nil); return }
+            guard let p = self.myProfile else { self.stopSelf(); return }
             if pid(of: p) != nil { self.seenRunning = true }
-            else if self.seenRunning || Date().timeIntervalSince(self.started) > 90 { NSApp.terminate(nil) }
+            else if self.seenRunning || Date().timeIntervalSince(self.started) > 90 { self.stopSelf() }
         }
     }
 
@@ -377,6 +377,16 @@ final class Delegate: NSObject, NSApplicationDelegate, NSMenuDelegate {
     }
 
     func applicationShouldTerminateAfterLastWindowClosed(_ s: NSApplication) -> Bool { false }
+
+    /// A launcher stands for its profile: "Quit" on its Dock icon quits that profile's Claude.
+    /// Quitting on its own (profile closed, unpinned) leaves Claude alone.
+    var stoppingOnOwn = false
+    func stopSelf() { stoppingOnOwn = true; NSApp.terminate(nil) }
+
+    func applicationShouldTerminate(_ s: NSApplication) -> NSApplication.TerminateReply {
+        if launcherID != nil, !stoppingOnOwn, let p = myProfile { quitProfile(p) }
+        return .terminateNow
+    }
 
     func applicationDockMenu(_ s: NSApplication) -> NSMenu? {
         if let p = myProfile { return profileMenu(p, running: pid(of: p) != nil) }
@@ -522,7 +532,9 @@ final class Delegate: NSObject, NSApplicationDelegate, NSMenuDelegate {
         ensureLauncher(p)
         if pinned(p) {
             dockEdit(old: u, new: nil)
-            launcherApp(p)?.terminate()   // a running launcher would keep the icon in the Dock
+            // A running launcher would keep the icon in the Dock. Force it: a normal quit is what the
+            // user's "Quit" sends, and that would close the profile's Claude too.
+            launcherApp(p)?.forceTerminate()
         } else {
             dockEdit(old: nil, new: u)
             attachTried[p.id] = nil       // its dot comes back on the next refresh if the profile is open

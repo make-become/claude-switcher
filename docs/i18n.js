@@ -14,7 +14,7 @@ en: {
   back: "← Back", source: "Source code on GitHub",
   whatH: "What it does",
   whatList: `<li><strong>One profile per account.</strong> Each profile is its own Claude Desktop, signed in to its own account, open at the same time as the others.</li>
-<li><strong>One Dock icon per profile,</strong> with a coloured letter. The dot under it means that profile is open; a click brings it to the front.</li>
+<li><strong>One Dock icon per profile,</strong> with a coloured letter. The dot under it means that profile is open; a click brings it to the front. <em>Quit</em> on that icon closes that profile.</li>
 <li><strong>Never two copies of one profile.</strong> An open profile is brought forward, not started again.</li>
 <li><strong>A menu</strong> where your mouse is, in the Dock (right-click) and in the menu bar, with one dot per profile <span class="dots"><span class="g">●</span><span class="b">●</span><span class="o">○</span></span>, filled when open.</li>
 <li><strong>Shortcuts:</strong> <code>⌥⌘1</code>, <code>⌥⌘2</code>, <code>⌥⌘3</code>… bring a profile forward from any app.</li>
@@ -59,7 +59,7 @@ it: {
   back: "← Indietro", source: "Codice sorgente su GitHub",
   whatH: "Cosa fa",
   whatList: `<li><strong>Un profilo per account.</strong> Ogni profilo è un Claude Desktop a sé, collegato al suo account, aperto insieme agli altri.</li>
-<li><strong>Un'icona nel Dock per profilo,</strong> con una lettera colorata. Il pallino sotto vuol dire che quel profilo è aperto; un clic lo porta davanti.</li>
+<li><strong>Un'icona nel Dock per profilo,</strong> con una lettera colorata. Il pallino sotto vuol dire che quel profilo è aperto; un clic lo porta davanti. <em>Esci</em> su quell'icona chiude quel profilo.</li>
 <li><strong>Mai due copie dello stesso profilo.</strong> Un profilo già aperto viene portato davanti, non riavviato.</li>
 <li><strong>Un menu</strong> dove si trova il mouse, nel Dock (clic destro) e nella barra dei menu, con un pallino per profilo <span class="dots"><span class="g">●</span><span class="b">●</span><span class="o">○</span></span>, pieno quando è aperto.</li>
 <li><strong>Scorciatoie:</strong> <code>⌥⌘1</code>, <code>⌥⌘2</code>, <code>⌥⌘3</code>… portano davanti un profilo da qualunque app.</li>
@@ -104,7 +104,7 @@ es: {
   back: "← Volver", source: "Código fuente en GitHub",
   whatH: "Qué hace",
   whatList: `<li><strong>Un perfil por cuenta.</strong> Cada perfil es su propio Claude Desktop, con su propia cuenta, abierto a la vez que los demás.</li>
-<li><strong>Un icono en el Dock por perfil,</strong> con una letra de color. El punto debajo indica que ese perfil está abierto; un clic lo trae al frente.</li>
+<li><strong>Un icono en el Dock por perfil,</strong> con una letra de color. El punto debajo indica que ese perfil está abierto; un clic lo trae al frente. <em>Salir</em> en ese icono cierra ese perfil.</li>
 <li><strong>Nunca dos copias del mismo perfil.</strong> Un perfil abierto se trae al frente, no se vuelve a iniciar.</li>
 <li><strong>Un menú</strong> donde está el ratón, en el Dock (clic derecho) y en la barra de menús, con un punto por perfil <span class="dots"><span class="g">●</span><span class="b">●</span><span class="o">○</span></span>, relleno cuando está abierto.</li>
 <li><strong>Atajos:</strong> <code>⌥⌘1</code>, <code>⌥⌘2</code>, <code>⌥⌘3</code>… traen un perfil al frente desde cualquier app.</li>
@@ -149,7 +149,7 @@ fr: {
   back: "← Retour", source: "Code source sur GitHub",
   whatH: "Ce qu'il fait",
   whatList: `<li><strong>Un profil par compte.</strong> Chaque profil est son propre Claude Desktop, connecté à son propre compte, ouvert en même temps que les autres.</li>
-<li><strong>Une icône dans le Dock par profil,</strong> avec une lettre colorée. Le point dessous signifie que ce profil est ouvert ; un clic le met au premier plan.</li>
+<li><strong>Une icône dans le Dock par profil,</strong> avec une lettre colorée. Le point dessous signifie que ce profil est ouvert ; un clic le met au premier plan. <em>Quitter</em> sur cette icône ferme ce profil.</li>
 <li><strong>Jamais deux copies d'un même profil.</strong> Un profil ouvert est mis au premier plan, pas relancé.</li>
 <li><strong>Un menu</strong> là où est la souris, dans le Dock (clic droit) et dans la barre des menus, avec un point par profil <span class="dots"><span class="g">●</span><span class="b">●</span><span class="o">○</span></span>, plein quand il est ouvert.</li>
 <li><strong>Raccourcis :</strong> <code>⌥⌘1</code>, <code>⌥⌘2</code>, <code>⌥⌘3</code>… mettent un profil au premier plan depuis n'importe quelle app.</li>
@@ -194,7 +194,7 @@ de: {
   back: "← Zurück", source: "Quellcode auf GitHub",
   whatH: "Was es macht",
   whatList: `<li><strong>Ein Profil pro Konto.</strong> Jedes Profil ist ein eigenes Claude Desktop mit eigenem Konto, gleichzeitig mit den anderen geöffnet.</li>
-<li><strong>Ein Dock-Symbol pro Profil,</strong> mit farbigem Buchstaben. Der Punkt darunter heißt: dieses Profil ist offen; ein Klick holt es nach vorn.</li>
+<li><strong>Ein Dock-Symbol pro Profil,</strong> mit farbigem Buchstaben. Der Punkt darunter heißt: dieses Profil ist offen; ein Klick holt es nach vorn. <em>Beenden</em> auf diesem Symbol schließt dieses Profil.</li>
 <li><strong>Nie zwei Kopien desselben Profils.</strong> Ein offenes Profil wird nach vorn geholt, nicht neu gestartet.</li>
 <li><strong>Ein Menü</strong> dort, wo die Maus ist, im Dock (Rechtsklick) und in der Menüleiste, mit einem Punkt pro Profil <span class="dots"><span class="g">●</span><span class="b">●</span><span class="o">○</span></span>, gefüllt, wenn es offen ist.</li>
 <li><strong>Tastenkürzel:</strong> <code>⌥⌘1</code>, <code>⌥⌘2</code>, <code>⌥⌘3</code>… holen ein Profil aus jeder App nach vorn.</li>
