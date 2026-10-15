@@ -59,4 +59,4 @@ focuses an open profile instead of launching it twice. Each launcher is a copy o
 
 ## Licence
 
-MIT · [make become](https://make-become.github.io/), an artware company. Claude is a trademark of Anthropic; this project is not affiliated with Anthropic.
+MIT · [make become](https://make-become.github.io/), an artware studio. Claude is a trademark of Anthropic; this project is not affiliated with Anthropic.
