@@ -52,3 +52,12 @@ footer { margin-top: 56px; color: var(--muted); font-size: 14px; display: flex; 
 .mb-dot { flex: none; width: 9px; height: 9px; border-radius: 999px; background: #7fad9a; box-shadow: 0 0 0 4px rgba(183, 216, 200, 0.45); }
 .mb-name { color: var(--fg); font-weight: 600; }
 .mb-role { color: #7fad9a; }
+
+/* Bottom row of the landing page: "More info" on the left, the studio's green button on the right. */
+.actions { display: flex; flex-wrap: wrap; gap: 12px; align-items: center; justify-content: space-between; margin-top: 28px; }
+.actions .btn { margin: 0; }
+.mb-btn { display: inline-grid; gap: 2px; padding: 10px 18px; border-radius: 10px; text-decoration: none; text-align: left;
+          background: #7fad9a; color: #0f1a15; font-family: Syne, "Avenir Next", -apple-system, system-ui, sans-serif; }
+.mb-btn:hover { background: #8fbda9; }
+.mb-btn-name { font-weight: 600; font-size: 17px; line-height: 1.1; letter-spacing: -0.01em; }
+.mb-btn-role { font-weight: 500; font-size: 13px; line-height: 1.1; opacity: 0.8; }
