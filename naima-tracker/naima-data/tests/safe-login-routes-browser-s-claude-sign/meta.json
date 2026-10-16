@@ -1,0 +1,15 @@
+{
+  "id": "cacd607d-3580-4adb-98c9-e951685a82a6",
+  "title": "Safe login routes the browser's claude:// sign-in to the profile signing in",
+  "status": "passed",
+  "created": "2026-10-16",
+  "section": "windows",
+  "runBy": "agent",
+  "evidenceKind": "observation",
+  "links": [
+    {
+      "rel": "verifies",
+      "id": "f93aa6e6-33d6-4a92-8710-34f35443cc14"
+    }
+  ]
+}

@@ -1,0 +1,15 @@
+{
+  "id": "8fbd18e3-245b-40d5-ab34-f2bf344a85d2",
+  "title": "A real Google sign-in through Safe login lands in the new profile",
+  "status": "open",
+  "created": "2026-10-16",
+  "section": "windows",
+  "runBy": "human",
+  "humanBecause": "credential",
+  "links": [
+    {
+      "rel": "verifies",
+      "id": "f93aa6e6-33d6-4a92-8710-34f35443cc14"
+    }
+  ]
+}

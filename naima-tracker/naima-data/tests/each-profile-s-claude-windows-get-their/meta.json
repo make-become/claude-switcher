@@ -1,0 +1,15 @@
+{
+  "id": "8a671d32-e542-4913-9877-f9ded42f55c2",
+  "title": "Each profile's Claude windows get their own taskbar icon with the profile's letter",
+  "status": "passed",
+  "created": "2026-10-16",
+  "section": "windows",
+  "runBy": "agent",
+  "evidenceKind": "observation",
+  "links": [
+    {
+      "rel": "verifies",
+      "id": "f93aa6e6-33d6-4a92-8710-34f35443cc14"
+    }
+  ]
+}
