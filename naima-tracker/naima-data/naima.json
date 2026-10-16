@@ -1,0 +1,8 @@
+{
+  "format": 3,
+  "formats": {
+    "gates": 2
+  },
+  "source": "https://github.com/vincenzoml/naima.git",
+  "commit": "842ebd4cf8b572ff8a55ca60449adc0143032ee4"
+}
