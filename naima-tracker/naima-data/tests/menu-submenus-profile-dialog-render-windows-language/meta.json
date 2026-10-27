@@ -1,0 +1,15 @@
+{
+  "id": "47378a6e-98d7-4bb7-8a7f-7ccf1684125d",
+  "title": "Menu, submenus and the profile dialog render in the Windows language; a rename moves the Start-menu entry and icon",
+  "status": "passed",
+  "created": "2026-10-16",
+  "section": "windows",
+  "runBy": "agent",
+  "evidenceKind": "observation",
+  "links": [
+    {
+      "rel": "verifies",
+      "id": "f93aa6e6-33d6-4a92-8710-34f35443cc14"
+    }
+  ]
+}

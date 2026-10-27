@@ -1,0 +1,15 @@
+{
+  "id": "2aea298b-c24a-4f02-971b-9331a47a051b",
+  "title": "The installer installs per user, lists the app in Settings > Apps, and uninstall removes everything but profile data",
+  "status": "passed",
+  "created": "2026-10-16",
+  "section": "windows",
+  "runBy": "agent",
+  "evidenceKind": "observation",
+  "links": [
+    {
+      "rel": "verifies",
+      "id": "f93aa6e6-33d6-4a92-8710-34f35443cc14"
+    }
+  ]
+}

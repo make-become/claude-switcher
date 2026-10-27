@@ -1,0 +1,15 @@
+{
+  "id": "f033cdb0-4d8f-4aa7-b0bd-72cbced7eabf",
+  "title": "Pinned profile icons and Open when Windows starts behave after a real sign-out and sign-in",
+  "status": "open",
+  "created": "2026-10-16",
+  "section": "windows",
+  "runBy": "human",
+  "humanBecause": "physical",
+  "links": [
+    {
+      "rel": "verifies",
+      "id": "f93aa6e6-33d6-4a92-8710-34f35443cc14"
+    }
+  ]
+}

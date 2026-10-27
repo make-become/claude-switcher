@@ -1,0 +1,3 @@
+# Each profile's Claude windows get their own taskbar icon with the profile's letter
+
+Measured 2026-10-16, Claude 2.42304 (Store). A second profile was started with --user-data-dir; with the Switcher running, its window left Claude's taskbar group for its own button showing Claude's logo with a blue T. A colour change redrew the icon under a new file name and the button showed it after the Switcher regrouped the window; 'Own taskbar icon' off put the window back in Claude's group, on gave it its own button again. Taskbar screenshots kept locally, not attached (they show the owner's other apps).

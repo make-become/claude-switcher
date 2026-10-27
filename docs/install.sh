@@ -31,6 +31,7 @@ ditto -x -k "$TMP/claude-switcher.zip" "$TMP"
 echo "→ Installing into $DEST"
 mkdir -p "$DEST"
 # Quit a running copy so it can be replaced; the per-profile launchers update themselves on next start.
+# naima: allow-wait-loop a single quit of the old copy before replacing it, not a wait
 pkill -f "Claude Switcher.app/Contents/MacOS/ClaudeSwitcher" 2>/dev/null || true
 sleep 1
 # Remember whether any copy was in the Dock: the Dock forgets an icon whose app is deleted.
