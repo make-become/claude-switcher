@@ -71,13 +71,39 @@ func run(_ exe: String, _ args: [String]) -> String {
     return String(decoding: d, as: UTF8.self)
 }
 
+/// A process's command line, joined with spaces as `ps` shows it.
+func commandLine(_ pid: pid_t) -> String? {
+    var mib = [CTL_KERN, KERN_PROCARGS2, pid]
+    var size = 0
+    guard sysctl(&mib, 3, nil, &size, nil, 0) == 0, size > 4 else { return nil }
+    var buf = [UInt8](repeating: 0, count: size)
+    guard sysctl(&mib, 3, &buf, &size, nil, 0) == 0, size > 4 else { return nil }
+    // Layout: argc, executable path, NUL padding, then argc NUL-terminated arguments.
+    let argc = Int(buf.withUnsafeBytes { $0.load(as: Int32.self) })
+    var i = 4
+    while i < size && buf[i] != 0 { i += 1 }
+    while i < size && buf[i] == 0 { i += 1 }
+    var args: [String] = []
+    while args.count < argc && i < size {
+        let s = i
+        while i < size && buf[i] != 0 { i += 1 }
+        args.append(String(decoding: buf[s..<i], as: UTF8.self)); i += 1
+    }
+    return args.joined(separator: " ")
+}
+
 /// Main Claude process of every running profile, read once per call (helpers have another binary path).
+/// No `ps`: reading every process's arguments can block for minutes behind one stuck process,
+/// which froze the launcher's main thread (macOS hang report, 2026-10-27). Only Claude's own
+/// processes, picked by executable path, have their arguments read.
 func runningPids(_ profiles: [Profile]) -> [String: pid_t] {
     var res: [String: pid_t] = [:]
-    for line in run("/bin/ps", ["-axo", "pid=,args="]).split(separator: "\n") {
-        let t = line.trimmingCharacters(in: .whitespaces)
-        guard let sp = t.firstIndex(of: " "), let pid = pid_t(t[..<sp]) else { continue }
-        let args = t[t.index(after: sp)...]
+    var pids = [pid_t](repeating: 0, count: Int(max(proc_listallpids(nil, 0), 0)) + 256)
+    let n = Int(proc_listallpids(&pids, Int32(pids.count * MemoryLayout<pid_t>.size)))
+    var path = [CChar](repeating: 0, count: 4 * Int(MAXPATHLEN))
+    for pid in pids.prefix(max(n, 0)) where pid > 0 {
+        guard proc_pidpath(pid, &path, UInt32(path.count)) > 0, String(cString: path) == claudeBin,
+              let args = commandLine(pid) else { continue }
         guard args == claudeBin || args.hasPrefix(claudeBin + " ") else { continue }
         for p in profiles where res[p.id] == nil {
             // Whole argument only: "Claude-Work" must not match a "Claude-WorkVL" profile.
@@ -181,7 +207,7 @@ func renderIcon(_ p: Profile, px: Int) -> Data? {
 
 /// Bump on every build: codesign rewrites each launcher's copy of the binary, so
 /// bytes cannot be compared, and this is what tells a launcher it is out of date.
-let switcherVersion = "1.0.2"
+let switcherVersion = "1.0.3"
 func iconStamp(_ p: Profile) -> String { "\(p.name)|\(p.color)|\(p.letter)" }
 
 /// (Re)build a profile's launcher when its binary or look is out of date.
@@ -363,11 +389,20 @@ final class Delegate: NSObject, NSApplicationDelegate, NSMenuDelegate {
         if !CommandLine.arguments.contains("--attach") { openProfile(p) }
         // Unpinned (e.g. started by "Open when the Mac starts"): open the profile and get out of the Dock.
         if !pinned(p) { stopSelf(); return }
+        // Polled off the main thread, one check at a time, so a slow check never freezes the Dock icon.
+        var checking = false
         Timer.scheduledTimer(withTimeInterval: 3, repeats: true) { [weak self] _ in
-            guard let self else { return }
+            guard let self, !checking else { return }
             guard let p = self.myProfile else { self.stopSelf(); return }
-            if pid(of: p) != nil { self.seenRunning = true }
-            else if self.seenRunning || Date().timeIntervalSince(self.started) > 90 { self.stopSelf() }
+            checking = true
+            DispatchQueue.global(qos: .utility).async {
+                let up = pid(of: p) != nil
+                DispatchQueue.main.async {
+                    checking = false
+                    if up { self.seenRunning = true }
+                    else if self.seenRunning || Date().timeIntervalSince(self.started) > 90 { self.stopSelf() }
+                }
+            }
         }
     }
 
