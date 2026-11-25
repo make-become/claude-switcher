@@ -12,6 +12,11 @@ body { margin: 0; background: var(--bg); color: var(--fg);
 main { max-width: 760px; margin: 0 auto; padding: 40px 16px 64px; }
 header { display: flex; gap: 16px; align-items: center; margin-bottom: 20px; }
 header img { width: 64px; height: 64px; flex: none; }
+/* "by make become" credit next to the product name; on a narrow phone it drops under the name */
+header .title { display: flex; flex-wrap: wrap; align-items: baseline; column-gap: 12px; row-gap: 2px; }
+header .title h1 { white-space: nowrap; }
+header .by { font-size: 13px; color: var(--muted); text-decoration: none; white-space: nowrap; }
+header .by:hover { color: var(--fg); }
 h1 { font-size: 32px; margin: 0; letter-spacing: -0.02em; }
 h2 { font-size: 21px; margin: 40px 0 10px; letter-spacing: -0.01em; }
 h3 { font-size: 17px; margin: 24px 0 6px; }

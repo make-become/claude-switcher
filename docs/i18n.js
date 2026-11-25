@@ -5,6 +5,7 @@ const NAMES = { en: "English", it: "Italiano", es: "Español", fr: "Français", 
 
 const T = {
 en: {
+  by: "by make become",
   lead: "Use several Claude Desktop accounts at the same time on one Mac: personal, work, a client. Each one gets its own coloured Dock icon, its own login and its own shortcut, and it is never opened twice. Free, open source, unofficial.",
   altMenu: "The Claude Switcher menu with three profiles", altEdit: "Editing a profile: name, letter, colour, e-mail",
   installH: "Install", installP: "Paste this in the Terminal:",
@@ -50,6 +51,7 @@ en: {
   footer: "MIT licence · <a href='https://make-become.github.io/'>make become</a> · Claude is a trademark of Anthropic; this project is not affiliated with Anthropic.",
 },
 it: {
+  by: "di make become",
   lead: "Usa più account di Claude Desktop insieme sullo stesso Mac: personale, lavoro, un cliente. Ognuno ha la sua icona colorata nel Dock, il suo login e la sua scorciatoia, e non si apre mai due volte. Gratuito, open source, non ufficiale.",
   altMenu: "Il menu di Claude Switcher con tre profili", altEdit: "Modifica di un profilo: nome, lettera, colore, e-mail",
   installH: "Installa", installP: "Incolla questo nel Terminale:",
@@ -95,6 +97,7 @@ it: {
   footer: "Licenza MIT · <a href='https://make-become.github.io/'>make become</a> · Claude è un marchio di Anthropic; questo progetto non è affiliato ad Anthropic.",
 },
 es: {
+  by: "de make become",
   lead: "Usa varias cuentas de Claude Desktop a la vez en un mismo Mac: personal, trabajo, un cliente. Cada una tiene su propio icono de color en el Dock, su propio inicio de sesión y su propio atajo, y nunca se abre dos veces. Gratis, de código abierto, no oficial.",
   altMenu: "El menú de Claude Switcher con tres perfiles", altEdit: "Editar un perfil: nombre, letra, color, correo",
   installH: "Instalar", installP: "Pega esto en el Terminal:",
@@ -140,6 +143,7 @@ es: {
   footer: "Licencia MIT · <a href='https://make-become.github.io/'>make become</a> · Claude es una marca de Anthropic; este proyecto no está afiliado a Anthropic.",
 },
 fr: {
+  by: "par make become",
   lead: "Utilisez plusieurs comptes Claude Desktop en même temps sur un seul Mac : perso, travail, un client. Chacun a sa propre icône colorée dans le Dock, sa propre connexion et son propre raccourci, et n'est jamais ouvert deux fois. Gratuit, open source, non officiel.",
   altMenu: "Le menu de Claude Switcher avec trois profils", altEdit: "Modifier un profil : nom, lettre, couleur, e-mail",
   installH: "Installer", installP: "Collez ceci dans le Terminal :",
@@ -185,6 +189,7 @@ fr: {
   footer: "Licence MIT · <a href='https://make-become.github.io/'>make become</a> · Claude est une marque d'Anthropic ; ce projet n'est pas affilié à Anthropic.",
 },
 de: {
+  by: "von make become",
   lead: "Mehrere Claude-Desktop-Konten gleichzeitig auf einem Mac: privat, Arbeit, ein Kunde. Jedes hat sein eigenes farbiges Dock-Symbol, seine eigene Anmeldung und sein eigenes Tastenkürzel, und es wird nie doppelt geöffnet. Kostenlos, Open Source, inoffiziell.",
   altMenu: "Das Menü von Claude Switcher mit drei Profilen", altEdit: "Ein Profil bearbeiten: Name, Buchstabe, Farbe, E-Mail",
   installH: "Installieren", installP: "Das hier ins Terminal einfügen:",
